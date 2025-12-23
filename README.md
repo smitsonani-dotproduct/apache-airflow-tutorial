@@ -36,7 +36,7 @@ export AIRFLOW_HOME=~/airflow
 
 2. Install Airflow (example: 2.8.x):
 ```bash
-pip install apache-airflow[EXTRAS]==AIRFLOW_VERSION --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-AIRFLOW_VERSION/constraints-PYTHON_VERSION.txt
+pip install apache-airflow[EXTRAS]==AIRFLOW_VERSION --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-AIRFLOW_VERSION/constraints-PYTHON_VERSION.txt"
 ```
 
 3. Start Airflow:
