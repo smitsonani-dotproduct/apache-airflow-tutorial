@@ -36,8 +36,7 @@ export AIRFLOW_HOME=~/airflow
 
 2. Install Airflow (example: 2.8.x):
 ```bash
-pip install "apache-airflow[postgres,celery]==2.8.1" \
-  --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.8.1/constraints-3.9.txt"
+pip install apache-airflow[EXTRAS]==AIRFLOW_VERSION --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-AIRFLOW_VERSION/constraints-PYTHON_VERSION.txt"
 ```
 
 3. Start Airflow:
