@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv
+venv/
+
+# Airflow
+airflow.cfg
+airflow.db
+airflow.db-shm
+airflow.db-wal
+webserver_config.py
+logs/
+unittests.cfg
+
+# DAG artifacts
+*.log
+*.pid
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+*.key
+*.pem
+*.env
