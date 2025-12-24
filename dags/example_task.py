@@ -45,7 +45,7 @@ def insert_users_data():
 def fetch_users_to_dataframe():
     hook = PostgresHook(postgres_conn_id="postgres_default")
     sql = """
-    SELECT id, firstname, lastname, gender, age, email, mobile
+    SELECT *
     FROM users
     WHERE age BETWEEN 20 AND 40;
     """
