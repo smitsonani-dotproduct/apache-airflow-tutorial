@@ -6,7 +6,7 @@ from airflow import DAG
 from airflow.decorators import task
 
 
-FILE_PATH = "/home/smit/airflow/tutorial/data/input/sample.txt"
+FILE_PATH = "/home/smit/airflow/data/input/sample.txt"
 
 
 with DAG(

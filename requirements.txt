@@ -1,9 +1,10 @@
-# Apache Airflow (with extras) version 3.1.5
-apache-airflow[EXTRAS]==3.1.5 --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-3.1.5/constraints-3.12.txt"
+# Apache Airflow 
+apache-airflow==3.1.5 --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-3.1.5/constraints-3.12.txt"
 
-# Providers (only install what you actually use)
-apache-airflow-providers-http==5.6.1
-apache-airflow-providers-amazon=9.18.0
+# Providers
+apache-airflow-providers-http
+apache-airflow-providers-amazon
+apache-airflow-providers-amazon[s3fs]
 
 # Data processing
 pandas>=1.5,<3.0
