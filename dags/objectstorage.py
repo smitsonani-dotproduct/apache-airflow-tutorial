@@ -1,9 +1,9 @@
 """
-→ Call Air Quality API
-→ Convert JSON → Pandas DataFrame
-→ Store data as Parquet in S3 (Object Storage)
-→ Read Parquet using DuckDB
-→ Analyze / print data
+-> Call Air Quality API
+-> Convert JSON -> Pandas DataFrame
+-> Store data as Parquet in S3 (Object Storage)
+-> Read Parquet using DuckDB
+-> Analyze / print data
 """
 
 from collections.abc import Mapping
