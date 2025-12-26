@@ -1,0 +1,4 @@
+id,firstname,lastname,nickname,gender,age,email,mobile,created_at
+1,Smit,Sonani,ss,Male,20,smit@example.com,+91-1030504001,2025-12-24 10:24:45.360372
+3,Kamal,Hasan,ks,Male,30,kamal@example.com,+91-9190909190,2025-12-24 10:24:45.360372
+4,Maya,Karadiya,mk,Female,34,maya@example.com,+91-9300930010,2025-12-24 10:24:45.360372

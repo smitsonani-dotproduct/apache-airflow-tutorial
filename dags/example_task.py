@@ -43,21 +43,24 @@ def insert_users_data():
 
 # Fetch data from db
 def fetch_users_to_dataframe():
+    import pandas as pd
+
     hook = PostgresHook(postgres_conn_id="postgres_default")
+    conn = hook.get_conn()
+
     sql = """
     SELECT *
     FROM users
     WHERE age BETWEEN 20 AND 40;
     """
 
-    df = hook.get_pandas_df(sql=sql)
+    df = pd.read_sql(sql, conn)
 
     print("users data :)", df)
     print(f"Total rows fetched: {len(df)} :)")
 
     temp_path = "/tmp/users.parquet"
     df.to_parquet(temp_path, index=False)
-
     print(f"Fetched {len(df)} rows and stored at {temp_path} :)")
 
     return {"path": temp_path, "processed_rows": len(df)}
