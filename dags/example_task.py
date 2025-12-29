@@ -2,6 +2,7 @@ from datetime import date, datetime
 from airflow import DAG
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
+import logging
 
 
 # Create Users table into db
@@ -25,20 +26,69 @@ def create_users_table():
 
 # Insert data into db
 def insert_users_data():
+    from faker import Faker
+    import random
+
     hook = PostgresHook(postgres_conn_id="postgres_default")
-    sql_query = """
-        INSERT INTO users (
-            firstname, lastname, nickname, gender, age, email, mobile
+    faker = Faker(locale="en_IN")
+    genders = ["Male", "Female"]
+    rows = []
+    num_records = 5
+
+    # sql_query = """
+    #     INSERT INTO users (
+    #         firstname, lastname, nickname, gender, age, email, mobile
+    #     )
+    #     VALUES
+    #         ('Smit', 'Sonani', 'ss', 'Male', 20, 'smit@example.com', '+91-1030504001'),
+    #         ('Nensi', 'Mangukiya', 'nm', 'Female', 45, 'nensi@example.com', '+91-4001020030'),
+    #         ('Kamal', 'Hasan', 'ks', 'Male', 30,'kamal@example.com', '+91-9190909190'),
+    #         ('Maya', 'Karadiya', 'mk', 'Female', 34, 'maya@example.com', '+91-9300930010'),
+    #         ('Rahul', 'Patel', 'rp', 'Male', 18, 'rahul@example.com', '+91-7654300000')
+    #     ON CONFLICT (email) DO NOTHING;
+    #     """
+    # hook.run(sql=sql_query)
+
+    for _ in range(num_records):
+        firstname = faker.first_name()
+        lastname = faker.last_name()
+        nickname = faker.user_name()
+        gender = random.choice(genders)
+        age = random.randint(15, 50)
+        email = faker.email()
+        mobile = faker.phone_number()
+
+        rows.append(
+            (
+                firstname,
+                lastname,
+                nickname,
+                gender,
+                age,
+                email,
+                mobile,
+            )
         )
-        VALUES
-            ('Smit', 'Sonani', 'ss', 'Male', 20, 'smit@example.com', '+91-1030504001'),
-            ('Nensi', 'Mangukiya', 'nm', 'Female', 45, 'nensi@example.com', '+91-4001020030'),
-            ('Kamal', 'Hasan', 'ks', 'Male', 30,'kamal@example.com', '+91-9190909190'),
-            ('Maya', 'Karadiya', 'mk', 'Female', 34, 'maya@example.com', '+91-9300930010'),
-            ('Rahul', 'Patel', 'rp', 'Male', 18, 'rahul@example.com', '+91-7654300000')
-        ON CONFLICT (email) DO NOTHING;
-        """
-    hook.run(sql=sql_query)
+
+    logging.info("Rows :)", rows)
+
+    hook.insert_rows(
+        table="users",
+        rows=rows,
+        target_fields=[
+            "firstname",
+            "lastname",
+            "nickname",
+            "gender",
+            "age",
+            "email",
+            "mobile",
+        ],
+        replace=False,  # to make it unique
+        commit_every=100,
+    )
+
+    logging.info("Inserted %s random users into users table", len(rows))
 
 
 # Fetch data from db
